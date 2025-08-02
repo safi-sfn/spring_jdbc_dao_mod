@@ -1,0 +1,52 @@
+# Java Class Files
+*.class
+
+# Logs
+*.log
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# IDE-specific (Eclipse)
+.project
+.classpath
+.settings/
+.target/
+
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+
+# Build tools
+build/
+
+# Temporary files
+*.swp
+*.tmp
+*.bak
+*.old
+*.orig
+
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Application-specific
+/webapp/WEB-INF/lib/  # if you're adding external jars manually, ignore them unless under version control

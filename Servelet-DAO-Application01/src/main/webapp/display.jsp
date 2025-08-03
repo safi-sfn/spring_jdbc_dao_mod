@@ -11,7 +11,7 @@
 		<br>
 		<br>
 		<br>
-		<table border="1" bgcolor="white">
+		<table border="1" bgcolor="white" size="6">
 			<tr>
 				<td>Student Id</td>
 				<td>${std.sid}</td>

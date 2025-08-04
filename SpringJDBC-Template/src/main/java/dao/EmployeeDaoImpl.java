@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 
 import dto.Employee;
-import mapper.EmployeeRowMapper;
+//import mapper.EmployeeRowMapper;
 
 //STEP-JDBC- 2. preparing DAO interface Implementation class
 
@@ -26,7 +26,15 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		
 		String status="";
 		try {
-			List<Employee> empList = jdbcTemplate.query("SELECT * FROM Employee WHERE eId = "+emp.getEid(), new EmployeeRowMapper());
+			List<Employee> empList = jdbcTemplate.query("SELECT * FROM Employee WHERE eId = "+emp.getEid(), // Before we use like this: new EmployeeRowMapper
+				(rs,index) ->{  // Replacing Employee row Mapper with lambda expression  
+					Employee emp1 = new Employee();
+					emp.setEid(rs.getInt("eId"));
+					emp.setEname(rs.getString("eName"));
+					emp.setEsallary(rs.getFloat("eSallary"));
+					emp.setEcity(rs.getString("eCity"));
+					return emp;
+			  });
 			if(empList.isEmpty() == true) {
 				int rowCount = jdbcTemplate.update("INSERT INTO Employee VALUES(" + emp.getEid() + ",'" + emp.getEcity() + "','" + emp.getEname() + "'," + emp.getEsallary() + ")");     
 				if(rowCount == 1) {

@@ -83,19 +83,19 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 	public String update(Employee emp) {
 		String status = "";
 		try {
-			Employee emp1 = search(emp.getEid());
-			if(emp1 == null) {
-				status = "Employee not existed";
-			}else {
+//			Employee emp1 = search(emp.getEid());
+//			if(emp1 == null) {
+//				status = "Employee not existed";
+//			}else {
 				int rowCount = jdbcTemplate.update("update Employee set eName = '"+emp.getEname()+"', eSallary = "+emp.getEsallary()+", eCity = '"+emp.getEcity()+"' where eId = "+emp.getEid());         
 				if(rowCount == 1) {
 					status = "employee updated successfully";
 				}else {
-					status = "employee updation failure";
+					status = "employee updation failure....";
 				}
-			}
+//			}
 		} catch (Exception e) {
-			System.out.println("employee updation failure");
+			System.out.println("employee updation failure----");
 			e.printStackTrace();
 		}
 		return status;

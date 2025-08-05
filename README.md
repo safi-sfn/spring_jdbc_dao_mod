@@ -17,16 +17,17 @@ Repository demonstrating **Spring JDBC** implementations with **DAO (Data Access
 
 | S.No | Project | Description | Key Features |
 |------|---------|-------------|--------------|
-| 1 | [📦 Basic JDBC Setup](basic-jdbc-setup/) | Core Spring JDBC configuration | `JdbcTemplate` • `DataSource` |
-| 2 | [📝 CRUD Operations](crud-operations/) | Create, Read, Update, Delete | `update()` • `query()` • `batchUpdate()` |
-| 3 | [🧩 DAO Interface](dao-interface/) | Standard DAO pattern | `EmployeeDao` • `@Repository` |
-| 4 | [🔧 RowMapper Implementation](rowmapper-implementation/) | Custom row mapping | `RowMapper<T>` • `BeanPropertyRowMapper` |
+| 1 | [📦 Servlet DAO Application](Servelet-DAO-Application01/) | Servlet integration with Spring DAO | `HttpServlet` • `Service Layer` • `DAO Pattern` |
+| 2 | [📝 JDBC Template](SpringJDBC-Template/) | Core Spring JDBC operations | `JdbcTemplate` • `update()` • `queryForObject()` |
+| 3 | [🧩 NamedParameter JDBC Template](ParameterJDBCTemplate/) | Safe SQL parameter binding | `NamedParameterJdbcTemplate` • `MapSqlParameterSource` |
+| 4 | [🔧 JdbcDaoSupport Classes](JdbcDaoSupport/) | Simplified DAO implementation | `JdbcDaoSupport` • `Pre-built SQL methods` |
+<!--
 | 5 | [🏗️ NamedParameterJdbcTemplate](named-parameter-jdbc/) | Named parameter queries | `NamedParameterJdbcTemplate` • `MapSqlParameterSource` |
 | 6 | [✨ SimpleJdbcInsert](simple-jdbc-insert/) | Simplified inserts | `SimpleJdbcInsert` • `execute()` |
 | 7 | [🔄 Transaction Management](transaction-management/) | ACID operations | `@Transactional` • `PlatformTransactionManager` |
 | 8 | [📜 XML Configuration](xml-configuration/) | XML-based JDBC setup | `<bean>` • `<tx:annotation-driven>` |
 | 9 | [☕ Java Config](java-configuration/) | Annotation-driven config | `@Configuration` • `@Bean` |
-
+-->
 ---
 
 ## 🚀 Quick Start  

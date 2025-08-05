@@ -24,13 +24,8 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 
 		String status = "";
 		try {
-			List<Employee> empList = jdbcTemplate.query("SELECT * FROM Employee WHERE eId = " + emp.getEid(), // Before
-																												// we
-																												// use
-																												// like
-																												// this:
-																												// new
-																												// EmployeeRowMapper
+			List<Employee> empList = jdbcTemplate.query("SELECT * FROM Employee WHERE eId = " + emp.getEid(), // Before : new EmployeRowMapper() 
+																												
 					(rs, index) -> { // Replacing Employee row Mapper with lambda expression
 						Employee emp1 = new Employee();
 						emp.setEid(rs.getInt("eId"));

@@ -22,7 +22,10 @@ import dto.EmployeeDTO;
 
 public class EmployeeImplDAO implements IEmployeeDAO {
 
+	// JDBC Template for database operations
 	private JdbcTemplate jdbcTemplate;
+	
+	// Handler for Large OBject (LOB) database operations (BLOB/CLOB)
 	private LobHandler lobHandler;
 	
 
@@ -30,6 +33,7 @@ public class EmployeeImplDAO implements IEmployeeDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	
 	public LobHandler getLobHandler() {
 		return lobHandler;
 	}
@@ -38,20 +42,40 @@ public class EmployeeImplDAO implements IEmployeeDAO {
 		this.lobHandler = lobHandler;
 	}
 
+	
+	//Inserts an employee record with LOB (Large Object) data into the database
 	@Override
 	public void insertEmployee(EmployeeDTO emp) {
+		
+		 // SQL query with placeholders for employee data and LOBs
 		String query = "insert into emp_doc values(?,?,?,?)";
+		
+		 // Execute query with LOB handling callback
 		jdbcTemplate.execute(query, new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
 
+			 /**
+	         * Sets values for the prepared statement including LOB handling
+	         * @param ps PreparedStatement to set values on
+	         * @param lobCreator Helper for LOB operations
+	         */
 			@Override
 			protected void setValues(PreparedStatement ps, LobCreator lobCreator)
 					throws SQLException, DataAccessException {
 				try {
-					ps.setInt(1,emp.getEno());
-					ps.setString(2, emp.getEname());
+					ps.setInt(1,emp.getEno());   // Employee number
+					ps.setString(2, emp.getEname());  // Employee name
+					
+					// Prepare file streams for LOBs
+					// Binary stream for image
 					FileInputStream fis = new FileInputStream(emp.getEmp_image());
+					
+					// Character stream for resume
 					FileReader fr = new FileReader(emp.getEmp_resume());
+					
+					 // Set BLOB (image) parameter
 					lobCreator.setBlobAsBinaryStream(ps, 3, fis, (int)emp.getEmp_image().length());
+					
+					// Set CLOB (resume) parameter
 					lobCreator.setClobAsCharacterStream(ps, 4, fr, (int)emp.getEmp_resume().length());
 					
 				} catch (Exception e) {

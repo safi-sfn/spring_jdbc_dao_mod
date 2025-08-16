@@ -19,11 +19,12 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 	}
 
 	@Override
-
 	public String add(Employee emp) {
 
 		String status = "";
 		try {
+			
+			// Check if employee already exists by ID
 			List<Employee> empList = jdbcTemplate.query("SELECT * FROM Employee WHERE eId = " + emp.getEid(), // Before : new EmployeRowMapper() 
 																												
 					(rs, index) -> { // Replacing Employee row Mapper with lambda expression
@@ -34,15 +35,22 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 						emp.setEcity(rs.getString("eCity"));
 						return emp;
 					});
+			
+			 // If no existing employee found
 			if (empList.isEmpty() == true) {
+				
+				 // Insert new employee (using string concatenation - not parameterized)
 				int rowCount = jdbcTemplate.update("INSERT INTO Employee VALUES(" + emp.getEid() + ",'" + emp.getEcity()
 						+ "','" + emp.getEname() + "'," + emp.getEsallary() + ")");
+				
+				 // Check if insert was successful
 				if (rowCount == 1) {
-					status = "Employee inserted successfull";
+					status = "Employee inserted successfull";   // Success message
 				} else {
-					status = "Employee insertion failure";
+					status = "Employee insertion failure";    // Failure message
 				}
 			} else {
+				// Employee with this ID already exists
 				status = "Employee Existed Already";
 			}
 		} catch (Exception e) {
@@ -50,14 +58,22 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			e.printStackTrace();
 		}
 
+		// Return operation status
 		return status;
 	}
 
 	@Override
 	public Employee search(int eid) {
+		
+		 // Initialize employee as null (will remain null if not found or on error)
 		Employee emp = null;
 		try {
-			List<Employee> empList = jdbcTemplate.query("select * from Employee where eId = " + eid, (rs, index) -> {
+			 // Execute SQL query to find employee by ID
+	        // WARNING: String concatenation makes this vulnerable to SQL injection
+			List<Employee> empList = jdbcTemplate.query("select * from Employee where eId = " + eid,
+			
+			// Lambda-based RowMapper to convert ResultSet to Employee object
+				(rs, index) -> {
 				Employee emp1 = new Employee();
 				emp1.setEid(rs.getInt("eId"));
 				emp1.setEname(rs.getString("eName"));
@@ -66,9 +82,13 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 				return emp1;
 			});
 
+			// Check if query returned any results
 			if (empList.isEmpty() == true) {
 				return null;
 			} else {
+				
+				 // Get first employee from result list
+	            // Note: Assumes eId is unique (should be true for primary key)
 				emp = empList.get(0);
 			}
 

@@ -25,6 +25,10 @@ Repository demonstrating **Spring JDBC** implementations with **DAO (Data Access
 | 5 | [🛠️ Named parameter JdbcDaoSupport](NamedParameterJdbcDaoSupport/) | Extended DAO support with named parameters | `NamedParameterJdbcDaoSupport` • `Named parameters` • `Type-safe queries` |
 | 6 | [⚡ Batch Updation](BatchUpdation/) | JDBC batch operations | `batchUpdate()` • `BatchPreparedStatementSetter` • `Performance optimization` |
 | 7 | [🚀 Spring Batch Updation](SpringBatchUpdation/) | Advanced batch processing | `JdbcTemplate batch operations` • `Parameterized queries` • `Batch size control` |
+| 8 | [🚀 Blob Insertion](JdbcBlobInsertion/) |  |  |
+| 9 | [🚀 Clob Insertion](JdbcClobInsertRead/) | |  |
+| 10 | [🚀 Blob Clob Operation](SpringBlobClobOperation/) | |  |
+
 
 ---
 
